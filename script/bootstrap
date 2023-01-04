@@ -1,0 +1,23 @@
+#!/bin/bash
+script_dir=$(cd $(dirname $0); pwd)
+root_dir=$(cd $script_dir/..; pwd)
+cd $root_dir
+
+# Check dependencies
+if ! type rustup > /dev/null 2>&1; then
+    echo "Rustup not found, I can install it for you if you want."
+    echo "Do you want me to install it? [y/N]"
+    read -r answer
+    if [ "$answer" = "y" ]; then
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    else
+        echo "Please install rustup and try again."
+        exit 1
+    fi
+fi
+
+# Make sure we've got make
+if ! type make > /dev/null 2>&1; then
+    echo "Make not found, please install it and try again."
+    exit 1
+fi

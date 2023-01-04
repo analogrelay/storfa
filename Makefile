@@ -8,6 +8,9 @@ default: all
 all: check install
 check: $(crates)
 
+fmt:
+	$(cargo) fmt
+
 storfad:
 	$(cargo) clippy -p storfad
 	$(cargo) test -p storfad
